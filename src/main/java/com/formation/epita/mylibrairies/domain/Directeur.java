@@ -1,7 +1,6 @@
-package com.formation.epita.mylibraries.librairie;
+package com.formation.epita.mylibrairies.domain;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
 @Embeddable
 public class Directeur {

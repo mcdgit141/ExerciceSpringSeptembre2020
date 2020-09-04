@@ -1,4 +1,4 @@
-package com.formation.epita.mylibraries.librairie;
+package com.formation.epita.mylibrairies.domain;
 
 public enum TypeLibrairie {
     associative,

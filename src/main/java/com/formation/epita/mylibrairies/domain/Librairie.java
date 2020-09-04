@@ -1,4 +1,4 @@
-package com.formation.epita.mylibraries.librairie;
+package com.formation.epita.mylibrairies.domain;
 
 import javax.persistence.*;
 
@@ -55,5 +55,11 @@ public class Librairie {
 
     public void setDirecteur(Directeur directeur) {
         this.directeur = directeur;
+    }
+
+    public void miseajour(Librairie librairieNewInfo) {
+        this.typeLibrairie = librairieNewInfo.getTypeLibrairie();
+        this.adresse = librairieNewInfo.getAdresse();
+        this.directeur = librairieNewInfo.getDirecteur();
     }
 }

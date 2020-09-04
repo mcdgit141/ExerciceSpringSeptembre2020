@@ -1,4 +1,4 @@
-package com.formation.epita.mylibraries.librairie;
+package com.formation.epita.mylibrairies.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
