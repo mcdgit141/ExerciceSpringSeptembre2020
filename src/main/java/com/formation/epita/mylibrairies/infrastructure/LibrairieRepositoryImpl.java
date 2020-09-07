@@ -16,7 +16,6 @@ public class LibrairieRepositoryImpl implements LibrairieRepository {
     private LibrairieDao librairieDao;
 
     @Autowired
-    static
     LibrairieEntityMapper librairieEntityMapper;
 
     @Override
@@ -25,7 +24,7 @@ public class LibrairieRepositoryImpl implements LibrairieRepository {
 //    }
     public void enregistrerLibrairie(Librairie librairie) {
 
-       librairieDao.save(LibrairieEntityMapper.domainToEntity(librairie));
+       librairieDao.save(librairieEntityMapper.domainToEntity(librairie));
 
     }
 

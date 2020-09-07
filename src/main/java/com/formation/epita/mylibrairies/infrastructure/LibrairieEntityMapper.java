@@ -10,29 +10,26 @@ import java.util.stream.Collectors;
 @Component
 public class LibrairieEntityMapper {
     @Autowired
-    static
     private AdresseEntityMapper adresseEntityMapper;
 
     @Autowired
-    static
     private DirecteurEntityMapper directeurEntityMapper;
     @Autowired
-    static
     private LivresEntityMapper livresEntityMapper;
 
-    public static Librairie entityToDomain(LibrairieEntity librairieEntity){
+    public Librairie entityToDomain(LibrairieEntity librairieEntity){
 
                 return new Librairie(librairieEntity.getTypeLibrairie(),adresseEntityMapper.entityToDomain(librairieEntity.getAdresseEntity()),
                 directeurEntityMapper.entityToDomain(librairieEntity.getDirecteurEntity()),
                 livresEntityMapper.mapToListEntityToDomain(librairieEntity.getLivresList()));
     }
 
-    public static List<Librairie> entityToDomainList(final List<LibrairieEntity> librairieEntityList){
+    public List<Librairie> entityToDomainList(final List<LibrairieEntity> librairieEntityList){
 
        return librairieEntityList.stream().map(e -> entityToDomain(e)).collect(Collectors.toList());
     }
 
-    public static LibrairieEntity domainToEntity(Librairie librairie){
+    public LibrairieEntity domainToEntity(Librairie librairie){
 
             final LibrairieEntity librairieEntity = new LibrairieEntity();
             librairieEntity.setTypeLibrairie(librairie.getTypeLibrairie());
