@@ -62,7 +62,7 @@ public class LibrairieRepositoryImpl implements LibrairieRepository {
     @Override
     public List<Librairie> rechercheLibrairieByDirecteurPrenom(String prenom) {
 
-        List<LibrairieEntity> librairieEntityList = librairieDao.findByDirecteurPrenom(prenom);
+        List<LibrairieEntity> librairieEntityList = librairieDao.findByDirecteurEntityPrenom(prenom);
         return librairieEntityMapper.entityToDomainList(librairieEntityList);
 
 //        return librairieDao.findByDirecteurPrenom(prenom);

@@ -11,6 +11,6 @@ public interface LibrairieDao extends JpaRepository<LibrairieEntity, Long> {
 
     List<LibrairieEntity> findByTypeLibrairie(TypeLibrairie type);
 
-    List<LibrairieEntity> findByDirecteurPrenom(String prenom);
+    List<LibrairieEntity> findByDirecteurEntityPrenom(String prenom);
 
 }

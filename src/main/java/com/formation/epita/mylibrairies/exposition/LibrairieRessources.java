@@ -20,15 +20,15 @@ public class LibrairieRessources {
     @Autowired
     private LibrairieService iLibrairieService;
 
-    @PostMapping(value = "/creation", consumes = { "application/json" }, produces =  { "application/json" })
-    @ResponseStatus(HttpStatus.CREATED)
-    public Librairie createLibrairie(@NotNull @RequestBody Librairie librairie) {
-
-        if (librairie != null) {
-            iLibrairieService.create(librairie);
-            }
-        return librairie;
-    }
+//    @PostMapping(value = "/creation", consumes = { "application/json" }, produces =  { "application/json" })
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Librairie createLibrairie(@NotNull @RequestBody Librairie librairie) {
+//
+//        if (librairie != null) {
+//            iLibrairieService.create(librairie);
+//            }
+//        return librairie;
+//    }
 
     @PostMapping(value = "/dto/creation", consumes = { "application/json" }, produces =  { "application/json" })
     @ResponseStatus(HttpStatus.CREATED)
