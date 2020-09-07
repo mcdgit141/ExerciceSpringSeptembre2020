@@ -1,36 +1,30 @@
 package com.formation.epita.mylibrairies.domain;
 
-import javax.persistence.*;
+import com.formation.epita.mylibrairies.infrastructure.AdresseEntity;
+import com.formation.epita.mylibrairies.infrastructure.DirecteurEntity;
 
-@Entity
+import java.util.List;
+
 public class Librairie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Enumerated(EnumType.STRING)
+    private Long id;
     private TypeLibrairie typeLibrairie;
-    @Embedded
+
     private Adresse adresse;
-    @Embedded
+
     private Directeur directeur;
+
+    private List<Livres> livresList;
 
     public Librairie() {
     }
 
-    public Librairie(Long id, TypeLibrairie typeLibrairie, Adresse adresse, Directeur directeur) {
-        this.id = id;
+    public Librairie(TypeLibrairie typeLibrairie, Adresse adresse, Directeur directeur, List<Livres> livresList) {
         this.typeLibrairie = typeLibrairie;
         this.adresse = adresse;
-        this.directeur = directeur;
-    }
+        this.directeur=directeur;
+        this.livresList = livresList;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public TypeLibrairie getTypeLibrairie() {
@@ -57,9 +51,21 @@ public class Librairie {
         this.directeur = directeur;
     }
 
+    public List<Livres> getLivresList() {
+        return livresList;
+    }
+
+    public void setLivresList(List<Livres> livresList) {
+        this.livresList = livresList;
+    }
+
     public void miseajour(Librairie librairieNewInfo) {
         this.typeLibrairie = librairieNewInfo.getTypeLibrairie();
         this.adresse = librairieNewInfo.getAdresse();
         this.directeur = librairieNewInfo.getDirecteur();
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -3,7 +3,7 @@ package com.formation.epita.mylibrairies.application;
 import com.formation.epita.mylibrairies.domain.Librairie;
 import com.formation.epita.mylibrairies.domain.LibrairieRepository;
 import com.formation.epita.mylibrairies.domain.TypeLibrairie;
-import com.formation.epita.mylibrairies.infrastructure.LibrairieDao;
+import com.formation.epita.mylibrairies.domain.exception.LibrairieNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,13 @@ public class LibrairieService {
     @Autowired
     LibrairieRepository librairieRepository;
 
-    public void create (Librairie librairie) {
+    public Librairie create (Librairie librairie) {
         librairieRepository.enregistrerLibrairie(librairie);
+        return librairie;
     }
 
     public Librairie rechercheLibrairieParId(Long id) {
-        return this.librairieRepository.rechercheLibrairieId(id).orElseThrow(() -> new RuntimeException("LIBRARY NOT FOUND"));
+        return this.librairieRepository.rechercheLibrairieId(id).orElseThrow(() -> new LibrairieNotFoundException("Librairie non trouvée avec cet id" + id));
     }
 
     public List<Librairie> rechercheTouteLibrairie(){

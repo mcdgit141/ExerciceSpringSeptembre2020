@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/gestlibrairie")
 
-public class ExpositionLibrairie {
+public class LibrairieRessources {
 
     @Autowired
     private LibrairieService iLibrairieService;
@@ -29,13 +30,27 @@ public class ExpositionLibrairie {
         return librairie;
     }
 
+    @PostMapping(value = "/dto/creation", consumes = { "application/json" }, produces =  { "application/json" })
+    @ResponseStatus(HttpStatus.CREATED)
+    public Librairie createLibrairieDTO(@NotNull @RequestBody LibrairieDTO librairieDTO) {
+
+        if (librairieDTO != null) {
+           Librairie librairie = iLibrairieService.create(LibrairieDTOMapper.expoToDomain(librairieDTO));
+            return librairie;
+        }
+       return null;
+    }
+
     @GetMapping(value = "/listeid/{id}" , produces = {"application/json"})
     public ResponseEntity<Librairie> rechercheLibrairieParId (@PathVariable("id") Long id) {
-
-        final Librairie librairie = iLibrairieService.rechercheLibrairieParId(id);
-        return new ResponseEntity<Librairie>(librairie, HttpStatus.OK);
-
+//        try {
+            final Librairie librairie = iLibrairieService.rechercheLibrairieParId(id);
+            return new ResponseEntity<Librairie>(librairie, HttpStatus.OK);
+//        } catch (RuntimeException ex) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Librairie non trouvée avec cet id : " + id, ex );
+//        }
     }
+
     @GetMapping(value = "/listeall" , produces = {"application/json"})
     public ResponseEntity<List<Librairie>> afficheTout () {
 

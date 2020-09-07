@@ -1,14 +1,19 @@
-package com.formation.epita.mylibrairies.domain;
+package com.formation.epita.mylibrairies.infrastructure;
 
-public class Directeur {
+import javax.persistence.*;
 
+@Entity
+public class DirecteurEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String prenom;
     private String nom;
 
-    public Directeur() {
+    public DirecteurEntity() {
     }
 
-    public Directeur(String prenom, String nom) {
+    public DirecteurEntity(String prenom, String nom) {
         this.prenom = prenom;
         this.nom = nom;
     }

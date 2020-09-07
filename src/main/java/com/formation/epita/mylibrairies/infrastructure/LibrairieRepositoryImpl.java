@@ -13,35 +13,66 @@ import java.util.Optional;
 public class LibrairieRepositoryImpl implements LibrairieRepository {
 
     @Autowired
-    LibrairieDao librairieDao;
+    private LibrairieDao librairieDao;
+
+    @Autowired
+    static
+    LibrairieEntityMapper librairieEntityMapper;
 
     @Override
+//    public void enregistrerLibrairie(Librairie librairie) {
+//        librairieDao.save(librairie);
+//    }
     public void enregistrerLibrairie(Librairie librairie) {
-        librairieDao.save(librairie);
+
+       librairieDao.save(LibrairieEntityMapper.domainToEntity(librairie));
+
     }
 
     @Override
     public Optional<Librairie> rechercheLibrairieId(Long id) {
-        return librairieDao.findById(id);
+
+        Optional<LibrairieEntity> librairieEntity = librairieDao.findById(id);
+//        LibrairieEntity librairieEntity1 = librairieEntity.orElseThrow(() -> new RuntimeException("librairie non trouvée"));
+//        Librairie librairie = librairieEntityMapper.entityToDomain(librairieEntity.get());
+//        Optional<Librairie> librairieOptional = Optional.of(librairie);
+
+        return Optional.of(librairieEntityMapper.entityToDomain(librairieEntity.orElseThrow(() -> new RuntimeException("librairie non trouvée"))));
+
     }
 
     @Override
     public List<Librairie> rechercheTouteLibrairie() {
-        return librairieDao.findAll();
+
+        List<LibrairieEntity> librairieEntityList = librairieDao.findAll();
+        return librairieEntityMapper.entityToDomainList(librairieEntityList);
+
+//        return librairieDao.findAll();
+
     }
 
     @Override
     public List<Librairie> rechercheTypeLibrairie(TypeLibrairie type) {
-        return librairieDao.findByTypeLibrairie(type);
+        List<LibrairieEntity> librairieEntityList = librairieDao.findByTypeLibrairie(type);
+        return librairieEntityMapper.entityToDomainList(librairieEntityList);
+
+//        return librairieDao.findByTypeLibrairie(type);
     }
 
     @Override
     public List<Librairie> rechercheLibrairieByDirecteurPrenom(String prenom) {
-        return librairieDao.findByDirecteurPrenom(prenom);
+
+        List<LibrairieEntity> librairieEntityList = librairieDao.findByDirecteurPrenom(prenom);
+        return librairieEntityMapper.entityToDomainList(librairieEntityList);
+
+//        return librairieDao.findByDirecteurPrenom(prenom);
     }
 
     @Override
     public void suppressionLibrairie(Librairie librairie) {
-        librairieDao.delete(librairie);
+
+        Optional<LibrairieEntity> librairieEntity = librairieDao.findById(librairie.getId());
+        librairieDao.delete(librairieEntityMapper.domainToEntity(librairie));
+//        librairieDao.delete(librairie);
     }
 }

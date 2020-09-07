@@ -1,17 +1,23 @@
-package com.formation.epita.mylibrairies.domain;
+package com.formation.epita.mylibrairies.infrastructure;
 
-public class Adresse {
+import javax.persistence.*;
+
+@Entity
+public class AdresseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String numero;
     private String rue;
     private String ville;
     private String codePostal;
 
-    public Adresse() {
+    public AdresseEntity() {
 
     }
 
-    public Adresse(String numero, String rue, String ville, String codePostal) {
+    public AdresseEntity(String numero, String rue, String ville, String codePostal) {
         this.numero = numero;
         this.rue = rue;
         this.ville = ville;
